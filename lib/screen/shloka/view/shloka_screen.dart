@@ -1,6 +1,8 @@
 import 'package:bhagavad_gita_app/screen/home/model/home_model.dart';
+import 'package:bhagavad_gita_app/screen/home/provider/home_provider.dart';
 import 'package:bhagavad_gita_app/widget/alert_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ShlokaScreen extends StatefulWidget {
   const ShlokaScreen({super.key});
@@ -16,10 +18,7 @@ class _ShlokaScreenState extends State<ShlokaScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            model.name,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+          title: context!.read<HomeProvider>().lag == "Gujarati"?Text(model.Guj, style: Theme.of(context).textTheme.titleLarge,):context.read<HomeProvider>().lag == "English"?Text(model.Eng, style: Theme.of(context).textTheme.titleLarge,):Text(model.name, style: Theme.of(context).textTheme.titleLarge,),
           centerTitle: true,
           actions: [
             PopupMenuButton(
@@ -34,7 +33,9 @@ class _ShlokaScreenState extends State<ShlokaScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.language),
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text("Language")
                         ],
                       ),
@@ -51,8 +52,16 @@ class _ShlokaScreenState extends State<ShlokaScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(model.shloka,
-                    style: Theme.of(context).textTheme.titleMedium)
+                Image.network(model.image,height: 300,width: double.infinity,),
+                SizedBox(height: 20,),
+                context.read<HomeProvider>().lag == "Gujarati"
+                    ? Text(model.gshloka,
+                        style: Theme.of(context).textTheme.titleMedium)
+                    : context.read<HomeProvider>().lag == "English"
+                        ? Text(model.Eshloka,
+                            style: Theme.of(context).textTheme.titleMedium)
+                        : Text(model.shloka,
+                            style: Theme.of(context).textTheme.titleMedium)
               ],
             ),
           ),

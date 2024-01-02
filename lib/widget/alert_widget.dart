@@ -30,8 +30,8 @@ void showWebDialog(BuildContext context) {
               },
             ),
             RadioListTile(
-              value: "Hindi",
-              title: Text("Hindi"),
+              value: "Sanskrit",
+              title: Text("Sanskrit"),
               groupValue: context.read<HomeProvider>().lag,
               onChanged: (value) {
                 context.read<HomeProvider>().language(value.toString());
