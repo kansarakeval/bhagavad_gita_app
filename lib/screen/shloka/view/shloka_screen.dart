@@ -52,7 +52,7 @@ class _ShlokaScreenState extends State<ShlokaScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.network(model.image,height: 300,width: double.infinity,),
+                ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.network(model.image,)),
                 SizedBox(height: 20,),
                 context.read<HomeProvider>().lag == "Gujarati"
                     ? Text(model.gshloka,
